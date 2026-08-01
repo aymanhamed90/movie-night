@@ -148,7 +148,19 @@ code{font-family:'Space Mono',monospace;color:#f0b23e;background:rgba(240,178,62
 .mn-seen-badge{position:absolute;top:6px;left:6px;z-index:2;background:rgba(13,15,22,0.85);color:var(--amber);border:1px solid rgba(240,178,62,0.5);font-family:'Space Mono',monospace;font-weight:700;font-size:9px;padding:2px 6px;border-radius:5px;}
 .mn-putback-ic{position:absolute;top:6px;right:6px;z-index:2;width:22px;height:22px;border-radius:50%;background:rgba(13,15,22,0.85);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:13px;border:1px solid var(--card-edge);transition:all .15s;}
 .mn-tile-btn:hover .mn-putback-ic{background:var(--amber);color:#241a06;}
-@media (max-width:520px){.mn-cta-row{flex-direction:column;}.mn-primary,.mn-secondary{width:100%;}.mn-results-foot .mn-secondary{flex:1;}.mn-stub{flex:0 0 84px;}.mn-poster-grid{grid-template-columns:repeat(auto-fill,minmax(92px,1fr));}}
+@media (max-width:560px){
+  .mn-cta-row{flex-direction:column;}
+  .mn-primary,.mn-secondary{width:100%;}
+  .mn-results-foot .mn-secondary{flex:1;}
+  .mn-poster-grid{grid-template-columns:repeat(auto-fill,minmax(92px,1fr));}
+  .mn-ticket{flex-direction:column;}
+  .mn-stub{flex:none;width:160px;align-self:center;margin:18px 0 2px;}
+  .mn-stub .mn-poster{aspect-ratio:2/3;border-radius:10px;}
+  .mn-vtear{display:none;}
+  .mn-ticket-body{padding:10px 20px 20px;text-align:center;}
+  .mn-meta,.mn-ticket-actions{justify-content:center;}
+  .mn-logline,.mn-why{text-align:left;}
+}
 @media (prefers-reduced-motion:reduce){.mn-quiz,.mn-bulb,.mn-reel{animation:none;}.mn-option:hover{transform:none;}.mn-primary:hover:not(:disabled){transform:none;}}
 
 </style>
@@ -161,7 +173,7 @@ code{font-family:'Space Mono',monospace;color:#f0b23e;background:rgba(240,178,62
 <!--  save. Get one free at https://www.themoviedb.org/settings/api -->
 <!-- ============================================================== -->
 <script>
-  window.MOVIE_NIGHT_TMDB_KEY = "PASTE_YOUR_TMDB_API_KEY_HERE";
+  window.MOVIE_NIGHT_TMDB_KEY = "01a789e459c593299f4b284154a981e5";
 </script>
 
 <!-- React is bundled inside this file, so the app loads on any network (no CDN). -->
@@ -475,7 +487,7 @@ function(a,b,c){if(!Vd(b))throw Error(n(200));return Wd(null,a,b,!1,c)};Q.unmoun
 //  PASTE YOUR FREE TMDB API KEY BETWEEN THE QUOTES BELOW.
 //  Get one at:  https://www.themoviedb.org/settings/api  (free, no card)
 // ════════════════════════════════════════════════════════════════
-const TMDB_KEY = "01a789e459c593299f4b284154a981e5";
+const TMDB_KEY = typeof window !== "undefined" && window.MOVIE_NIGHT_TMDB_KEY || "01a789e459c593299f4b284154a981e5";
 // ════════════════════════════════════════════════════════════════
 
 const IMGBASE = "https://image.tmdb.org/t/p/";
@@ -547,6 +559,56 @@ const GNAME = {
   37: "Western",
   10770: "TV Movie"
 };
+const COUNTRY = {
+  FR: "France",
+  KR: "South Korea",
+  JP: "Japan",
+  IT: "Italy",
+  ES: "Spain",
+  DE: "Germany",
+  MX: "Mexico",
+  BR: "Brazil",
+  CN: "China",
+  HK: "Hong Kong",
+  TW: "Taiwan",
+  IN: "India",
+  IR: "Iran",
+  SE: "Sweden",
+  DK: "Denmark",
+  NO: "Norway",
+  FI: "Finland",
+  IS: "Iceland",
+  RU: "Russia",
+  GB: "UK",
+  IE: "Ireland",
+  CA: "Canada",
+  AU: "Australia",
+  NZ: "New Zealand",
+  AR: "Argentina",
+  CL: "Chile",
+  NL: "Netherlands",
+  BE: "Belgium",
+  PL: "Poland",
+  TR: "Turkey",
+  TH: "Thailand",
+  ID: "Indonesia",
+  PH: "Philippines",
+  GR: "Greece",
+  PT: "Portugal",
+  RO: "Romania",
+  HU: "Hungary",
+  CZ: "Czechia",
+  AT: "Austria",
+  CH: "Switzerland",
+  ZA: "South Africa",
+  EG: "Egypt",
+  IL: "Israel",
+  SA: "Saudi Arabia",
+  AE: "UAE",
+  LB: "Lebanon",
+  VN: "Vietnam",
+  UA: "Ukraine"
+};
 const FEEL_GENRES = {
   "Cozy & comforting": [GENRE.Family, GENRE.Comedy, GENRE.Romance, GENRE.Animation],
   "Tense & thrilling": [GENRE.Thriller, GENRE.Action, GENRE.Crime, GENRE.Mystery],
@@ -609,7 +671,9 @@ function toItem(m) {
     poster: img(m.poster_path, "w342"),
     rating: typeof m.vote_average === "number" && m.vote_average > 0 ? m.vote_average.toFixed(1) : null,
     genres: (m.genre_ids || []).map(g => GNAME[g]).filter(Boolean),
-    logline: m.overview || ""
+    logline: m.overview || "",
+    country: m._country || "",
+    runtime: m._runtime || ""
   };
 }
 function buildDiscover(ans, page) {
@@ -664,7 +728,17 @@ async function recommend(ans, favorites, watched) {
     const j = Math.floor(Math.random() * (i + 1));
     [out[i], out[j]] = [out[j], out[i]];
   }
-  return out.slice(0, 5);
+  const chosen = out.slice(0, 5);
+  // Look up country of origin (not in list results) for each pick, best-effort.
+  await Promise.all(chosen.map(async m => {
+    try {
+      const d = await tmdb("/movie/" + m.id);
+      const c = d.production_countries && d.production_countries[0] && d.production_countries[0].iso_3166_1 || "";
+      m._country = COUNTRY[c] || (c && c !== "US" ? c : "");
+      m._runtime = d.runtime ? d.runtime + " min" : "";
+    } catch (_) {}
+  }));
+  return chosen;
 }
 async function searchTMDB(q) {
   if (q.trim().length < 2) return [];
@@ -1025,9 +1099,13 @@ function MovieNight() {
     className: "mn-title"
   }, p.title), /*#__PURE__*/React.createElement("div", {
     className: "mn-meta"
-  }, /*#__PURE__*/React.createElement("span", null, p.year || "—"), p.genreLabel ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", null, p.year || "—"), p.runtime ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
     className: "mn-dot-sep"
-  }), /*#__PURE__*/React.createElement("span", null, p.genreLabel)) : null), /*#__PURE__*/React.createElement("p", {
+  }), /*#__PURE__*/React.createElement("span", null, p.runtime)) : null, p.genreLabel ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "mn-dot-sep"
+  }), /*#__PURE__*/React.createElement("span", null, p.genreLabel)) : null, p.country ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "mn-dot-sep"
+  }), /*#__PURE__*/React.createElement("span", null, p.country)) : null), /*#__PURE__*/React.createElement("p", {
     className: "mn-logline"
   }, p.logline || "No synopsis on file — a wildcard pick."), /*#__PURE__*/React.createElement("p", {
     className: "mn-why"
