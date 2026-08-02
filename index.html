@@ -10,11 +10,11 @@ html,body{height:100%;margin:0;padding:0;background:#0d0f16;}
 #root{min-height:100%;}
 code{font-family:'Space Mono',monospace;color:#f0b23e;background:rgba(240,178,62,0.1);padding:1px 6px;border-radius:5px;font-size:0.9em;}
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Space+Mono:wght@400;700&display=swap');
 .mn-root{--ink:#0d0f16;--ink-2:#141826;--card:#191d2b;--card-edge:#2a3042;--amber:#f0b23e;--amber-soft:#f7cf7e;--velvet:#c14a3f;--cream:#efe8da;--muted:#8b90a3;--muted-2:#5c6172;
   min-height:100%;background:radial-gradient(1200px 600px at 50% -10%, rgba(240,178,62,0.10), transparent 60%),var(--ink);color:var(--cream);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
 .mn-root *{box-sizing:border-box;}
-.mn-top{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;max-width:860px;margin:0 auto;flex-wrap:wrap;gap:10px;}
+.mn-top{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;max-width:860px;margin:0 auto;flex-wrap:wrap;gap:10px;position:relative;z-index:3;}
 .mn-nav{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end;}
 .mn-tkt{display:inline-flex;align-items:stretch;cursor:pointer;border:none;padding:0;border-radius:9px;overflow:hidden;font-family:'Space Mono',monospace;position:relative;box-shadow:0 4px 14px -6px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,255,255,0.28);transition:transform .15s,box-shadow .15s,filter .15s;}
 .mn-tkt:hover{transform:translateY(-1px);filter:brightness(1.06);box-shadow:0 9px 18px -6px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.34);}
@@ -37,13 +37,27 @@ code{font-family:'Space Mono',monospace;color:#f0b23e;background:rgba(240,178,62
 .mn-brandname{font-family:'Bebas Neue',sans-serif;letter-spacing:2px;font-size:20px;}
 .mn-ghost{background:transparent;border:1px solid var(--card-edge);color:var(--muted);padding:8px 14px;border-radius:999px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Space Mono',monospace;transition:all .18s;}
 .mn-ghost:hover{color:var(--cream);border-color:var(--amber);}
-.mn-stage{max-width:860px;margin:0 auto;padding:24px 22px 64px;}
+.mn-stage{max-width:860px;margin:0 auto;padding:24px 22px 64px;position:relative;z-index:1;}
 .mn-home{padding-top:40px;}
 .mn-eyebrow{font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:3px;font-size:11px;color:var(--amber);margin:0 0 18px;}
-.mn-marquee{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(46px,10vw,86px);line-height:0.92;letter-spacing:1px;margin:0 0 20px;text-shadow:0 0 40px rgba(240,178,62,0.12);}
+.mn-marquee{font-family:'Playfair Display',Georgia,serif;font-weight:800;font-size:clamp(40px,8.5vw,74px);line-height:1.03;letter-spacing:0;margin:0 0 6px;color:var(--cream);text-shadow:0 2px 30px rgba(0,0,0,0.5);}
+.mn-marquee em{display:block;font-style:italic;font-weight:600;color:var(--amber);text-shadow:0 0 34px rgba(240,178,62,0.32);}
+.mn-deco{display:flex;align-items:center;gap:14px;max-width:440px;margin:2px 0 24px;}
+.mn-deco::before,.mn-deco::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(240,178,62,0.55),transparent);}
+.mn-deco i{width:9px;height:9px;background:var(--amber);transform:rotate(45deg);box-shadow:0 0 12px rgba(240,178,62,0.7);flex:none;}
+.mn-stage-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(58% 42% at 50% -2%, rgba(240,178,62,0.18), rgba(240,178,62,0.05) 42%, transparent 72%),radial-gradient(140% 120% at 50% 8%, transparent 52%, rgba(0,0,0,0.6) 100%);}
+.mn-stage-bg::before,.mn-stage-bg::after{content:"";position:absolute;top:0;bottom:0;width:130px;background:repeating-linear-gradient(90deg,#3a0d10 0,#651619 12px,#2c090c 24px,#651619 36px,#3a0d10 48px);opacity:0.55;}
+.mn-stage-bg::before{left:0;-webkit-mask-image:linear-gradient(90deg,#000,transparent);mask-image:linear-gradient(90deg,#000,transparent);}
+.mn-stage-bg::after{right:0;-webkit-mask-image:linear-gradient(270deg,#000,transparent);mask-image:linear-gradient(270deg,#000,transparent);}
 .mn-sub{font-size:16px;line-height:1.6;color:var(--muted);max-width:460px;margin:0 0 34px;}
 .mn-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px;}
-.mn-primary{background:var(--amber);color:#241a06;border:none;font-weight:700;padding:15px 28px;border-radius:12px;font-size:15px;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 24px -8px rgba(240,178,62,0.6);}
+.mn-mode{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 26px;}
+.mn-mode-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted-2);}
+.mn-mode-opts{display:inline-flex;background:var(--ink-2);border:1px solid var(--card-edge);border-radius:999px;padding:4px;gap:4px;}
+.mn-mode-opt{background:transparent;border:none;color:var(--muted);font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:0.5px;padding:8px 20px;border-radius:999px;cursor:pointer;transition:all .16s;}
+.mn-mode-opt:hover{color:var(--cream);}
+.mn-mode-opt.on{background:linear-gradient(135deg,#f6c25a,#e8a52e);color:#241a06;box-shadow:0 2px 10px -2px rgba(240,178,62,0.5);}
+.mn-primary{background:linear-gradient(135deg,#f6c25a,#e8a52e);color:#241a06;border:none;font-weight:700;padding:15px 28px;border-radius:12px;font-size:15px;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 24px -8px rgba(240,178,62,0.6),inset 0 1px 0 rgba(255,255,255,0.32);}
 .mn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(240,178,62,0.7);}
 .mn-primary:disabled{opacity:0.5;cursor:default;}
 .mn-secondary{background:transparent;color:var(--cream);border:1px solid var(--card-edge);padding:15px 24px;border-radius:12px;font-size:15px;font-weight:500;cursor:pointer;transition:all .18s;}
@@ -64,7 +78,7 @@ code{font-family:'Space Mono',monospace;color:#f0b23e;background:rgba(240,178,62
 .mn-dot{width:26px;height:4px;border-radius:2px;background:var(--ink-2);transition:background .3s;}
 .mn-dot.on{background:var(--amber);}
 .mn-qhint{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--velvet);margin:0 0 10px;}
-.mn-question{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:0.5px;font-size:clamp(32px,6vw,52px);line-height:1;margin:0 0 30px;}
+.mn-question{font-family:'Playfair Display',Georgia,serif;font-weight:800;letter-spacing:0;font-size:clamp(30px,5.6vw,46px);line-height:1.08;margin:0 0 26px;color:var(--cream);}
 .mn-options{display:flex;flex-direction:column;gap:11px;}
 .mn-option{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--card-edge);color:var(--cream);padding:18px 20px;border-radius:12px;font-size:16px;font-weight:500;cursor:pointer;text-align:left;transition:all .16s;}
 .mn-option:hover{border-color:var(--amber);background:var(--ink-2);transform:translateX(4px);}
@@ -80,7 +94,7 @@ code{font-family:'Space Mono',monospace;color:#f0b23e;background:rgba(240,178,62
 .mn-loadtext{font-family:'Bebas Neue',sans-serif;letter-spacing:2px;font-size:24px;color:var(--muted);}
 .mn-results{padding-top:28px;}
 .mn-results-head{margin-bottom:26px;}
-.mn-nowshowing{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:1px;font-size:clamp(38px,7vw,60px);line-height:1;margin:0;}
+.mn-nowshowing{font-family:'Playfair Display',Georgia,serif;font-weight:800;letter-spacing:0;font-size:clamp(34px,6.5vw,54px);line-height:1.04;margin:0;color:var(--cream);}
 .mn-tickets{display:flex;flex-direction:column;gap:16px;}
 .mn-ticket{display:flex;background:var(--card);border:1px solid var(--card-edge);border-radius:16px;overflow:hidden;transition:border-color .2s;}
 .mn-ticket:hover{border-color:rgba(240,178,62,0.4);}
@@ -103,6 +117,24 @@ code{font-family:'Space Mono',monospace;color:#f0b23e;background:rgba(240,178,62
 .mn-watched{background:transparent;border:1px solid var(--card-edge);color:var(--muted);padding:9px 14px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;transition:all .16s;}
 .mn-watched:hover{border-color:var(--amber);color:var(--amber);}
 .mn-empty-results{margin-bottom:8px;}
+.mn-where-btn{background:transparent;border:1px solid var(--card-edge);color:var(--amber);padding:9px 14px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;transition:all .16s;}
+.mn-where-btn:hover{border-color:var(--amber);background:rgba(240,178,62,0.08);}
+.mn-where{margin-top:14px;border-top:1px solid var(--ink-2);padding-top:14px;display:flex;flex-direction:column;gap:10px;text-align:left;}
+.mn-prov-row{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;}
+.mn-prov-label{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted-2);min-width:50px;padding-top:7px;}
+.mn-prov-list{display:flex;gap:8px;flex-wrap:wrap;flex:1;}
+.mn-prov{display:inline-flex;align-items:center;gap:7px;background:var(--ink-2);border:1px solid var(--card-edge);border-radius:8px;padding:4px 10px 4px 4px;}
+.mn-prov-logo{width:24px;height:24px;border-radius:5px;object-fit:cover;display:block;}
+.mn-prov-name{font-size:12px;color:var(--cream);}
+.mn-where-link{color:var(--amber);font-size:13px;text-decoration:none;font-weight:600;align-self:flex-start;}
+.mn-where-link:hover{text-decoration:underline;}
+.mn-where-msg{margin:0;font-size:13px;color:var(--muted);}
+.mn-where-attr{margin:0;font-size:10px;color:var(--muted-2);font-family:'Space Mono',monospace;}
+.mn-warm-loading{display:flex;align-items:center;gap:14px;color:var(--muted);font-family:'Space Mono',monospace;font-size:14px;padding:22px 0;}
+.mn-warm-loading .mn-reel{position:static;width:26px;height:26px;border-width:3px;box-shadow:none;}
+.mn-warm-foot{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:26px;}
+.mn-tile-sel .mn-tile-poster::after{content:"";position:absolute;inset:0;border-radius:10px;box-shadow:inset 0 0 0 3px var(--amber);pointer-events:none;}
+.mn-sel-badge{position:absolute;top:6px;right:6px;z-index:3;width:26px;height:26px;border-radius:50%;background:var(--amber);color:#241a06;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,0.5);}
 .mn-love{background:transparent;border:1px solid var(--card-edge);color:var(--cream);padding:9px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;transition:all .16s;}
 .mn-love:hover:not(:disabled){border-color:var(--velvet);color:var(--velvet);}
 .mn-love.done{border-color:var(--velvet);color:var(--velvet);background:rgba(193,74,63,0.1);cursor:default;}
@@ -160,6 +192,7 @@ code{font-family:'Space Mono',monospace;color:#f0b23e;background:rgba(240,178,62
   .mn-ticket-body{padding:10px 20px 20px;text-align:center;}
   .mn-meta,.mn-ticket-actions{justify-content:center;}
   .mn-logline,.mn-why{text-align:left;}
+  .mn-stage-bg::before,.mn-stage-bg::after{width:54px;opacity:0.4;}
 }
 @media (prefers-reduced-motion:reduce){.mn-quiz,.mn-bulb,.mn-reel{animation:none;}.mn-option:hover{transform:none;}.mn-primary:hover:not(:disabled){transform:none;}}
 
@@ -169,11 +202,12 @@ code{font-family:'Space Mono',monospace;color:#f0b23e;background:rgba(240,178,62
 <div id="root"></div>
 
 <!-- ============================================================== -->
-<!--  PASTE YOUR FREE TMDB API KEY between the quotes below, then    -->
-<!--  save. Get one free at https://www.themoviedb.org/settings/api -->
+<!--  Your TMDB key is pre-filled below. REGION sets which country   -->
+<!--  streaming availability is shown for (SA=Saudi Arabia).         -->
 <!-- ============================================================== -->
 <script>
   window.MOVIE_NIGHT_TMDB_KEY = "01a789e459c593299f4b284154a981e5";
+  window.MOVIE_NIGHT_REGION = "SA";
 </script>
 
 <!-- React is bundled inside this file, so the app loads on any network (no CDN). -->
@@ -487,11 +521,12 @@ function(a,b,c){if(!Vd(b))throw Error(n(200));return Wd(null,a,b,!1,c)};Q.unmoun
 //  PASTE YOUR FREE TMDB API KEY BETWEEN THE QUOTES BELOW.
 //  Get one at:  https://www.themoviedb.org/settings/api  (free, no card)
 // ════════════════════════════════════════════════════════════════
-const TMDB_KEY = typeof window !== "undefined" && window.MOVIE_NIGHT_TMDB_KEY || "01a789e459c593299f4b284154a981e5";
+const TMDB_KEY = typeof window !== "undefined" && window.MOVIE_NIGHT_TMDB_KEY || "PASTE_YOUR_TMDB_API_KEY_HERE";
 // ════════════════════════════════════════════════════════════════
 
 const IMGBASE = "https://image.tmdb.org/t/p/";
 const keyReady = TMDB_KEY && !TMDB_KEY.startsWith("PASTE");
+const REGION = typeof window !== "undefined" && window.MOVIE_NIGHT_REGION || "US";
 const QUESTIONS = [{
   id: "feel",
   prompt: "What do you want to feel tonight?",
@@ -616,6 +651,40 @@ const FEEL_GENRES = {
   "Light & funny": [GENRE.Comedy],
   "Epic & sweeping": [GENRE.Adventure, GENRE.Action, GENRE.Fantasy, GENRE.SciFi, GENRE.War]
 };
+const GNAME_TV = {
+  10759: "Action & Adventure",
+  16: "Animation",
+  35: "Comedy",
+  80: "Crime",
+  99: "Documentary",
+  18: "Drama",
+  10751: "Family",
+  10762: "Kids",
+  9648: "Mystery",
+  10763: "News",
+  10764: "Reality",
+  10765: "Sci-Fi & Fantasy",
+  10766: "Soap",
+  10767: "Talk",
+  10768: "War & Politics",
+  37: "Western"
+};
+const FEEL_GENRES_TV = {
+  "Cozy & comforting": [35, 10751, 16],
+  "Tense & thrilling": [80, 9648, 10759],
+  "Deep & moving": [18],
+  "Light & funny": [35],
+  "Epic & sweeping": [10765, 10759, 10768, 18]
+};
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = a[i];
+    a[i] = a[j];
+    a[j] = t;
+  }
+  return a;
+}
 const GP = {
   thriller: ["#241417", "#c14a3f"],
   crime: ["#151726", "#8a7cff"],
@@ -661,40 +730,46 @@ function img(path, size) {
   return path ? IMGBASE + (size || "w342") + path : null;
 }
 function yearOf(m) {
-  return (m.release_date || "").slice(0, 4);
+  return (m.release_date || m.first_air_date || "").slice(0, 4);
 }
-function toItem(m) {
+function toItem(m, typeHint) {
+  const type = typeHint || m._type || m.media_type || "movie";
+  const names = type === "tv" ? GNAME_TV : GNAME;
   return {
     id: m.id,
+    type,
     title: m.title || m.name || "Untitled",
     year: yearOf(m),
     poster: img(m.poster_path, "w342"),
     rating: typeof m.vote_average === "number" && m.vote_average > 0 ? m.vote_average.toFixed(1) : null,
-    genres: (m.genre_ids || []).map(g => GNAME[g]).filter(Boolean),
+    genres: (m.genre_ids || []).map(g => names[g]).filter(Boolean),
     logline: m.overview || "",
     country: m._country || "",
     runtime: m._runtime || ""
   };
 }
-function buildDiscover(ans, page) {
-  const feel = FEEL_GENRES[ans.feel] || [GENRE.Drama];
+function buildDiscover(ans, page, mode) {
+  const tv = mode === "tv";
+  const feel = (tv ? FEEL_GENRES_TV : FEEL_GENRES)[ans.feel] || [tv ? 18 : GENRE.Drama];
   const params = ["with_genres=" + feel.join("|"), "include_adult=false"];
-  if (ans.time.startsWith("Under")) params.push("with_runtime.lte=105");else if (ans.time.startsWith("Around")) {
-    params.push("with_runtime.gte=90");
-    params.push("with_runtime.lte=150");
-  } else params.push("with_runtime.gte=130");
+  if (!tv) {
+    if (ans.time.startsWith("Under")) params.push("with_runtime.lte=105");else if (ans.time.startsWith("Around")) {
+      params.push("with_runtime.gte=90");
+      params.push("with_runtime.lte=150");
+    } else params.push("with_runtime.gte=130");
+  }
   let sort = "popularity.desc",
-    minVotes = 400;
+    minVotes = tv ? 150 : 400;
   if (ans.novelty.startsWith("Comfort")) {
     sort = "popularity.desc";
-    minVotes = 900;
+    minVotes = tv ? 400 : 900;
   } else if (ans.novelty.startsWith("Surprise")) {
     sort = "vote_average.desc";
-    minVotes = 500;
+    minVotes = tv ? 250 : 500;
   }
   if (ans.brain.startsWith("All-in")) {
     sort = "vote_average.desc";
-    minVotes = 800;
+    minVotes = tv ? 400 : 800;
   }
   if (ans.brain.startsWith("Low-effort")) {
     sort = "popularity.desc";
@@ -702,48 +777,51 @@ function buildDiscover(ans, page) {
   params.push("sort_by=" + sort);
   params.push("vote_count.gte=" + minVotes);
   params.push("page=" + page);
-  return "/discover/movie?" + params.join("&");
+  return "/discover/" + (tv ? "tv" : "movie") + "?" + params.join("&");
 }
-async function recommend(ans, favorites, watched) {
-  const excluded = new Set([...favorites, ...watched].map(f => f.id));
-  const first = await tmdb(buildDiscover(ans, 1));
+async function recommend(ans, favorites, watched, mode) {
+  const tv = mode === "tv";
+  const path = tv ? "tv" : "movie";
+  const relFav = favorites.filter(f => (f.type || "movie") === mode);
+  const excluded = new Set(watched.filter(w => (w.type || "movie") === mode).concat(relFav).map(f => f.id));
+  const first = await tmdb(buildDiscover(ans, 1, mode));
   const totalPages = Math.min(first.total_pages || 1, 12);
   const page = 1 + Math.floor(Math.random() * Math.max(1, Math.min(totalPages, 8)));
-  let pool = (page === 1 ? first : await tmdb(buildDiscover(ans, page))).results || [];
-  if (favorites.length) {
-    const fav = favorites[Math.floor(Math.random() * favorites.length)];
+  let pool = (page === 1 ? first : await tmdb(buildDiscover(ans, page, mode))).results || [];
+  if (relFav.length) {
+    const fav = relFav[Math.floor(Math.random() * relFav.length)];
     try {
-      const rec = await tmdb("/movie/" + fav.id + "/recommendations?page=1");
+      const rec = await tmdb("/" + path + "/" + fav.id + "/recommendations?page=1");
       pool = pool.concat(rec.results || []);
     } catch (_) {}
   }
   const seen = new Set(),
     out = [];
   for (const m of pool) {
-    if (!m || excluded.has(m.id) || seen.has(m.id) || !m.title) continue;
+    const t = m && (m.title || m.name);
+    if (!m || excluded.has(m.id) || seen.has(m.id) || !t) continue;
     seen.add(m.id);
     out.push(m);
   }
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [out[i], out[j]] = [out[j], out[i]];
-  }
+  shuffle(out);
   const chosen = out.slice(0, 5);
-  // Look up country of origin (not in list results) for each pick, best-effort.
+  // Look up country + runtime (not in list results) for each pick, best-effort.
   await Promise.all(chosen.map(async m => {
     try {
-      const d = await tmdb("/movie/" + m.id);
-      const c = d.production_countries && d.production_countries[0] && d.production_countries[0].iso_3166_1 || "";
+      const d = await tmdb("/" + path + "/" + m.id);
+      const c = d.production_countries && d.production_countries[0] && d.production_countries[0].iso_3166_1 || d.origin_country && d.origin_country[0] || "";
       m._country = COUNTRY[c] || (c && c !== "US" ? c : "");
-      m._runtime = d.runtime ? d.runtime + " min" : "";
+      const rt = d.runtime || d.episode_run_time && d.episode_run_time[0];
+      m._runtime = rt ? rt + " min" + (tv ? "/ep" : "") : "";
     } catch (_) {}
+    m._type = mode;
   }));
   return chosen;
 }
 async function searchTMDB(q) {
   if (q.trim().length < 2) return [];
-  const j = await tmdb("/search/movie?query=" + encodeURIComponent(q) + "&include_adult=false&page=1");
-  return (j.results || []).filter(m => m.title).slice(0, 6);
+  const j = await tmdb("/search/multi?query=" + encodeURIComponent(q) + "&include_adult=false&page=1");
+  return (j.results || []).filter(m => (m.media_type === "movie" || m.media_type === "tv") && (m.title || m.name) && m.poster_path).slice(0, 6);
 }
 function whyLine(it, tasteGenres, feel) {
   const head = {
@@ -791,8 +869,31 @@ function Poster({
     className: "mn-fb-year"
   }, year) : null);
 }
+function ProvChips({
+  label,
+  items
+}) {
+  if (!items || !items.length) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "mn-prov-row"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "mn-prov-label"
+  }, label), /*#__PURE__*/React.createElement("div", {
+    className: "mn-prov-list"
+  }, items.map(pr => /*#__PURE__*/React.createElement("span", {
+    className: "mn-prov",
+    key: pr.provider_id
+  }, pr.logo_path ? /*#__PURE__*/React.createElement("img", {
+    src: IMGBASE + "w92" + pr.logo_path,
+    alt: pr.provider_name,
+    className: "mn-prov-logo"
+  }) : null, /*#__PURE__*/React.createElement("span", {
+    className: "mn-prov-name"
+  }, pr.provider_name)))));
+}
 function MovieNight() {
   const [screen, setScreen] = useState("home");
+  const [returnTo, setReturnTo] = useState("home");
   const [favorites, setFavorites] = useState([]);
   const [watched, setWatched] = useState([]);
   const [ready, setReady] = useState(false);
@@ -801,6 +902,13 @@ function MovieNight() {
   const [picks, setPicks] = useState([]);
   const [loved, setLoved] = useState([]);
   const [error, setError] = useState(null);
+  const [provOpen, setProvOpen] = useState({});
+  const [provData, setProvData] = useState({});
+  const [onboarded, setOnboarded] = useState(false);
+  const [warmFilms, setWarmFilms] = useState([]);
+  const [warmSel, setWarmSel] = useState([]);
+  const [warmLoading, setWarmLoading] = useState(false);
+  const [mode, setMode] = useState("movie");
   const [query, setQuery] = useState("");
   const [matches, setMatches] = useState([]);
   const [searching, setSearching] = useState(false);
@@ -811,17 +919,26 @@ function MovieNight() {
     const d = loadLS();
     if (Array.isArray(d.favorites)) setFavorites(d.favorites);
     if (Array.isArray(d.watched)) setWatched(d.watched);
+    if (d.onboarded) setOnboarded(true);
+    if (d.mode === "tv" || d.mode === "movie") setMode(d.mode);
     setReady(true);
+    const noFav = !(Array.isArray(d.favorites) && d.favorites.length);
+    if (keyReady && noFav && !d.onboarded) {
+      setScreen("warmup");
+      loadWarmup();
+    }
   }, []);
   useEffect(() => {
     if (!ready) return;
     clearTimeout(persistTimer.current);
     persistTimer.current = setTimeout(() => saveLS({
       favorites,
-      watched
+      watched,
+      onboarded,
+      mode
     }), 400);
     return () => clearTimeout(persistTimer.current);
-  }, [favorites, watched, ready]);
+  }, [favorites, watched, onboarded, mode, ready]);
   useEffect(() => {
     const q = query.trim();
     if (q.length < 2) {
@@ -878,7 +995,7 @@ function MovieNight() {
     setError(null);
     setLoved([]);
     try {
-      const recs = await recommend(finalAnswers, favorites, watched);
+      const recs = await recommend(finalAnswers, favorites, watched, mode);
       if (!recs.length) throw new Error("empty");
       const tg = new Set(favorites.flatMap(f => f.genres || []));
       const items = recs.map(m => {
@@ -898,6 +1015,7 @@ function MovieNight() {
   function loveIt(p) {
     setFavorites(prev => prev.some(f => f.id === p.id) ? prev : [...prev, {
       id: p.id,
+      type: p.type || "movie",
       title: p.title,
       year: p.year,
       poster: p.poster,
@@ -912,6 +1030,7 @@ function MovieNight() {
   function markWatched(p) {
     setWatched(w => w.some(x => x.id === p.id) ? w : [...w, {
       id: p.id,
+      type: p.type || "movie",
       title: p.title,
       year: p.year,
       poster: p.poster,
@@ -922,6 +1041,97 @@ function MovieNight() {
   }
   function unwatch(id) {
     setWatched(w => w.filter(x => x.id !== id));
+  }
+  async function toggleWhere(p) {
+    setProvOpen(o => ({
+      ...o,
+      [p.id]: !o[p.id]
+    }));
+    if (provData[p.id]) return;
+    setProvData(d => ({
+      ...d,
+      [p.id]: {
+        loading: true
+      }
+    }));
+    try {
+      const j = await tmdb("/" + (p.type === "tv" ? "tv" : "movie") + "/" + p.id + "/watch/providers");
+      const block = (j.results || {})[REGION] || null;
+      setProvData(d => ({
+        ...d,
+        [p.id]: {
+          loading: false,
+          block,
+          link: block && block.link
+        }
+      }));
+    } catch (_) {
+      setProvData(d => ({
+        ...d,
+        [p.id]: {
+          loading: false,
+          block: null,
+          error: true
+        }
+      }));
+    }
+  }
+  async function loadWarmup() {
+    setWarmLoading(true);
+    try {
+      const movieGenres = [18, 878, 28, 35]; // drama, sci-fi, action, comedy
+      const tvGenres = [18, 10765]; // drama, sci-fi & fantasy
+      const calls = [...movieGenres.map(g => tmdb("/discover/movie?with_genres=" + g + "&sort_by=popularity.desc&vote_count.gte=2000&include_adult=false&page=1").then(r => ({
+        t: "movie",
+        list: r.results || []
+      })).catch(() => ({
+        t: "movie",
+        list: []
+      }))), ...tvGenres.map(g => tmdb("/discover/tv?with_genres=" + g + "&sort_by=popularity.desc&vote_count.gte=400&include_adult=false&page=1").then(r => ({
+        t: "tv",
+        list: r.results || []
+      })).catch(() => ({
+        t: "tv",
+        list: []
+      })))];
+      const res = await Promise.all(calls);
+      const seen = new Set(),
+        out = [];
+      res.forEach(({
+        t,
+        list
+      }) => {
+        let n = 0;
+        for (const m of list) {
+          if (n >= 2) break;
+          if (!m.poster_path || seen.has(m.id)) continue;
+          seen.add(m.id);
+          out.push(toItem(m, t));
+          n++;
+        }
+      });
+      setWarmFilms(shuffle(out).slice(0, 12));
+    } catch (_) {
+      setWarmFilms([]);
+    }
+    setWarmLoading(false);
+  }
+  function toggleWarm(id) {
+    setWarmSel(s => s.includes(id) ? s.filter(x => x !== id) : [...s, id]);
+  }
+  function finishWarmup() {
+    const sel = warmFilms.filter(f => warmSel.includes(f.id));
+    setFavorites(prev => {
+      const ex = new Set(prev.map(p => p.id));
+      return [...prev, ...sel.filter(f => !ex.has(f.id))];
+    });
+    setOnboarded(true);
+    setWarmSel([]);
+    setScreen("home");
+  }
+  function skipWarmup() {
+    setOnboarded(true);
+    setScreen("home");
   }
   const showDrop = focused && query.trim().length >= 2 && (searching || matches.length > 0);
   if (!keyReady) {
@@ -952,20 +1162,27 @@ function MovieNight() {
   }, /*#__PURE__*/React.createElement("header", {
     className: "mn-top"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "mn-brand"
+    className: "mn-brand",
+    onClick: () => setScreen("home"),
+    style: {
+      cursor: "pointer"
+    }
   }, /*#__PURE__*/React.createElement("span", {
     className: "mn-bulb",
     "aria-hidden": "true"
   }), /*#__PURE__*/React.createElement("span", {
     className: "mn-brandname"
-  }, "Movie Night")), screen !== "quiz" && screen !== "loading" && (screen === "taste" || screen === "watched" ? /*#__PURE__*/React.createElement("button", {
+  }, "Movie Night")), screen !== "quiz" && screen !== "loading" && screen !== "warmup" && (screen === "taste" || screen === "watched" ? /*#__PURE__*/React.createElement("button", {
     className: "mn-ghost",
-    onClick: () => setScreen("home")
-  }, "Back") : /*#__PURE__*/React.createElement("div", {
+    onClick: () => setScreen(returnTo)
+  }, returnTo === "results" ? "← Back to picks" : "Back") : /*#__PURE__*/React.createElement("div", {
     className: "mn-nav"
   }, /*#__PURE__*/React.createElement("button", {
     className: "mn-tkt mn-tkt-gold",
-    onClick: () => setScreen("taste"),
+    onClick: () => {
+      setReturnTo(screen);
+      setScreen("taste");
+    },
     "aria-label": "My taste, " + favorites.length + " films"
   }, /*#__PURE__*/React.createElement("span", {
     className: "mn-tkt-ico"
@@ -978,7 +1195,10 @@ function MovieNight() {
     className: "mn-tkt-count"
   }, favorites.length)), /*#__PURE__*/React.createElement("button", {
     className: "mn-tkt mn-tkt-red",
-    onClick: () => setScreen("watched"),
+    onClick: () => {
+      setReturnTo(screen);
+      setScreen("watched");
+    },
     "aria-label": "Watched, " + watched.length + " films"
   }, /*#__PURE__*/React.createElement("span", {
     className: "mn-tkt-ico"
@@ -989,29 +1209,55 @@ function MovieNight() {
     className: "mn-tkt-txt"
   }, "Watched"), /*#__PURE__*/React.createElement("span", {
     className: "mn-tkt-count"
-  }, watched.length))))), screen === "home" && /*#__PURE__*/React.createElement("main", {
+  }, watched.length))))), /*#__PURE__*/React.createElement("div", {
+    className: "mn-stage-bg",
+    "aria-hidden": "true"
+  }), screen === "home" && /*#__PURE__*/React.createElement("main", {
     className: "mn-stage mn-home"
   }, /*#__PURE__*/React.createElement("p", {
     className: "mn-eyebrow"
   }, "Now showing, just for you"), /*#__PURE__*/React.createElement("h1", {
     className: "mn-marquee"
-  }, "What are we", /*#__PURE__*/React.createElement("br", null), "watching tonight?"), /*#__PURE__*/React.createElement("p", {
+  }, "What are we", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("em", null, "watching tonight?")), /*#__PURE__*/React.createElement("div", {
+    className: "mn-deco",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/React.createElement("p", {
     className: "mn-sub"
-  }, "Answer five quick questions and I'll pull five films from the whole movie database — tuned to your mood", favorites.length > 0 ? " and your taste." : "."), favorites.length === 0 && /*#__PURE__*/React.createElement("div", {
+  }, "Answer five quick questions and I'll pull five ", mode === "tv" ? "shows" : "films", " tuned to your mood", favorites.length > 0 ? " and your taste." : "."), favorites.length === 0 && /*#__PURE__*/React.createElement("div", {
     className: "mn-firstrun"
-  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "New here?"), " Add a couple of films you love first — the picks get much sharper once I know your taste. You can always skip and just go by mood."), /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "New here?"), " Add a couple of titles you love first — the picks get much sharper once I know your taste. You can always skip and just go by mood."), /*#__PURE__*/React.createElement("button", {
     className: "mn-secondary",
-    onClick: () => setScreen("taste")
-  }, "Add films I love")), /*#__PURE__*/React.createElement("div", {
+    onClick: () => {
+      setReturnTo("home");
+      setScreen("taste");
+    }
+  }, "Add to my taste")), /*#__PURE__*/React.createElement("div", {
+    className: "mn-mode",
+    role: "group",
+    "aria-label": "Choose movie or series"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "mn-mode-label"
+  }, "Tonight I want a…"), /*#__PURE__*/React.createElement("div", {
+    className: "mn-mode-opts"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "mn-mode-opt" + (mode === "movie" ? " on" : ""),
+    onClick: () => setMode("movie")
+  }, "Movie"), /*#__PURE__*/React.createElement("button", {
+    className: "mn-mode-opt" + (mode === "tv" ? " on" : ""),
+    onClick: () => setMode("tv")
+  }, "Series"))), /*#__PURE__*/React.createElement("div", {
     className: "mn-cta-row"
   }, /*#__PURE__*/React.createElement("button", {
     className: "mn-primary",
     onClick: startQuiz,
     disabled: !ready
-  }, "Find me something"), /*#__PURE__*/React.createElement("button", {
+  }, mode === "tv" ? "Find me a series" : "Find me a movie"), /*#__PURE__*/React.createElement("button", {
     className: "mn-secondary",
-    onClick: () => setScreen("taste")
-  }, favorites.length ? "Edit my taste" : "Add films I love")), favorites.length > 0 && /*#__PURE__*/React.createElement("div", {
+    onClick: () => {
+      setReturnTo("home");
+      setScreen("taste");
+    }
+  }, favorites.length ? "Edit my taste" : "Add to my taste")), favorites.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "mn-taste-strip"
   }, /*#__PURE__*/React.createElement("span", {
     className: "mn-strip-label"
@@ -1062,7 +1308,64 @@ function MovieNight() {
     className: "mn-reel"
   })), /*#__PURE__*/React.createElement("p", {
     className: "mn-loadtext"
-  }, "Developing your picks…")), screen === "results" && /*#__PURE__*/React.createElement("main", {
+  }, "Developing your picks…")), screen === "warmup" && /*#__PURE__*/React.createElement("main", {
+    className: "mn-stage mn-taste"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "mn-eyebrow"
+  }, "Let's tune your taste"), /*#__PURE__*/React.createElement("h2", {
+    className: "mn-nowshowing"
+  }, "Tap the ones you love"), /*#__PURE__*/React.createElement("div", {
+    className: "mn-deco",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/React.createElement("p", {
+    className: "mn-sub mn-taste-sub"
+  }, "Pick any that are your kind of film — I'll use them to sharpen your picks. Don't recognise one? Just skip it. You can always add more later."), warmLoading ? /*#__PURE__*/React.createElement("div", {
+    className: "mn-warm-loading"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "mn-reel"
+  }), /*#__PURE__*/React.createElement("span", null, "Loading a few films…")) : /*#__PURE__*/React.createElement("div", {
+    className: "mn-poster-grid"
+  }, warmFilms.map(f => {
+    const sel = warmSel.includes(f.id);
+    return /*#__PURE__*/React.createElement("div", {
+      className: "mn-tile mn-tile-btn" + (sel ? " mn-tile-sel" : ""),
+      key: f.id,
+      role: "button",
+      tabIndex: 0,
+      "aria-pressed": sel,
+      onClick: () => toggleWarm(f.id),
+      onKeyDown: e => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleWarm(f.id);
+        }
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "mn-tile-poster"
+    }, /*#__PURE__*/React.createElement(Poster, {
+      title: f.title,
+      year: f.year,
+      poster: f.poster,
+      genre: f.genres && f.genres[0],
+      kind: "tile"
+    }), sel ? /*#__PURE__*/React.createElement("span", {
+      className: "mn-sel-badge"
+    }, "✓") : null), /*#__PURE__*/React.createElement("div", {
+      className: "mn-tile-cap"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "mn-tile-title"
+    }, f.title), f.year ? /*#__PURE__*/React.createElement("span", {
+      className: "mn-tile-year"
+    }, f.year) : null));
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "mn-warm-foot"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "mn-primary",
+    onClick: finishWarmup
+  }, warmSel.length ? "Continue with " + warmSel.length : "Continue"), /*#__PURE__*/React.createElement("button", {
+    className: "mn-ghost",
+    onClick: skipWarmup
+  }, "Skip for now"))), screen === "results" && /*#__PURE__*/React.createElement("main", {
     className: "mn-stage mn-results"
   }, /*#__PURE__*/React.createElement("div", {
     className: "mn-results-head"
@@ -1070,7 +1373,10 @@ function MovieNight() {
     className: "mn-eyebrow"
   }, "Tonight's programme"), /*#__PURE__*/React.createElement("h2", {
     className: "mn-nowshowing"
-  }, "Now Showing")), error && /*#__PURE__*/React.createElement("div", {
+  }, "Now Showing"), /*#__PURE__*/React.createElement("div", {
+    className: "mn-deco",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("i", null))), error && /*#__PURE__*/React.createElement("div", {
     className: "mn-error"
   }, /*#__PURE__*/React.createElement("p", null, error), /*#__PURE__*/React.createElement("button", {
     className: "mn-primary",
@@ -1121,9 +1427,42 @@ function MovieNight() {
     className: "mn-watched",
     onClick: () => markWatched(p)
   }, "✓ Watched recently"), /*#__PURE__*/React.createElement("button", {
+    className: "mn-where-btn",
+    onClick: () => toggleWhere(p)
+  }, provOpen[p.id] ? "▾ Where to watch" : "▷ Where to watch"), /*#__PURE__*/React.createElement("button", {
     className: "mn-skip",
     onClick: () => notForMe(i)
-  }, "Not for me")))))), picks.length === 0 && /*#__PURE__*/React.createElement("div", {
+  }, "Not for me")), provOpen[p.id] && (() => {
+    const d = provData[p.id] || {};
+    return /*#__PURE__*/React.createElement("div", {
+      className: "mn-where"
+    }, d.loading ? /*#__PURE__*/React.createElement("p", {
+      className: "mn-where-msg"
+    }, "Checking availability…") : d.block && (d.block.flatrate || d.block.rent || d.block.buy) ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ProvChips, {
+      label: "Stream",
+      items: d.block.flatrate
+    }), /*#__PURE__*/React.createElement(ProvChips, {
+      label: "Rent",
+      items: d.block.rent
+    }), /*#__PURE__*/React.createElement(ProvChips, {
+      label: "Buy",
+      items: d.block.buy
+    }), d.link ? /*#__PURE__*/React.createElement("a", {
+      className: "mn-where-link",
+      href: d.link,
+      target: "_blank",
+      rel: "noopener noreferrer"
+    }, "See all options ↗") : null, /*#__PURE__*/React.createElement("p", {
+      className: "mn-where-attr"
+    }, "Availability in your region · data from JustWatch")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+      className: "mn-where-msg"
+    }, "No streaming match found for your region", d.error ? " (lookup failed)" : "", "."), /*#__PURE__*/React.createElement("a", {
+      className: "mn-where-link",
+      href: "https://www.google.com/search?q=" + encodeURIComponent(p.title + " " + (p.year || "") + " watch online"),
+      target: "_blank",
+      rel: "noopener noreferrer"
+    }, "Search where to watch ↗")));
+  })())))), picks.length === 0 && /*#__PURE__*/React.createElement("div", {
     className: "mn-empty mn-empty-results"
   }, /*#__PURE__*/React.createElement("p", null, "You've cleared tonight's picks — reshuffle for a fresh set.")), /*#__PURE__*/React.createElement("div", {
     className: "mn-results-foot"
@@ -1139,7 +1478,10 @@ function MovieNight() {
     className: "mn-eyebrow"
   }, "Your taste profile"), /*#__PURE__*/React.createElement("h2", {
     className: "mn-nowshowing"
-  }, "Films you love"), /*#__PURE__*/React.createElement("p", {
+  }, "Films you love"), /*#__PURE__*/React.createElement("div", {
+    className: "mn-deco",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/React.createElement("p", {
     className: "mn-sub mn-taste-sub"
   }, "Start typing and pick from the list. I read these every time to match your picks — saved in this browser for next visit."), /*#__PURE__*/React.createElement("div", {
     className: "mn-add-wrap"
@@ -1166,7 +1508,9 @@ function MovieNight() {
     }
   }, /*#__PURE__*/React.createElement("span", {
     className: "mn-drop-title"
-  }, m.title), /*#__PURE__*/React.createElement("span", {
+  }, m.title || m.name, m.media_type === "tv" ? /*#__PURE__*/React.createElement("span", {
+    className: "mn-drop-flag"
+  }, " · Series") : null), /*#__PURE__*/React.createElement("span", {
     className: "mn-drop-year"
   }, m.vote_average ? "★ " + m.vote_average.toFixed(1) + "  ·  " : "", yearOf(m)))), !searching && matches.length === 0 && /*#__PURE__*/React.createElement("div", {
     className: "mn-drop-status"
@@ -1193,16 +1537,19 @@ function MovieNight() {
     className: "mn-tile-title"
   }, f.title), (f.rating || f.year) && /*#__PURE__*/React.createElement("span", {
     className: "mn-tile-year"
-  }, f.rating ? "★ " + f.rating + "  ·  " : "", f.year || ""))))), /*#__PURE__*/React.createElement("button", {
+  }, f.type === "tv" ? "Series · " : "", f.rating ? "★ " + f.rating + "  ·  " : "", f.year || ""))))), /*#__PURE__*/React.createElement("button", {
     className: "mn-secondary mn-taste-done",
-    onClick: () => setScreen("home")
+    onClick: () => setScreen(returnTo)
   }, "Done")), screen === "watched" && /*#__PURE__*/React.createElement("main", {
     className: "mn-stage mn-taste"
   }, /*#__PURE__*/React.createElement("p", {
     className: "mn-eyebrow"
   }, "Seen it already"), /*#__PURE__*/React.createElement("h2", {
     className: "mn-nowshowing"
-  }, "Watched recently"), /*#__PURE__*/React.createElement("p", {
+  }, "Watched recently"), /*#__PURE__*/React.createElement("div", {
+    className: "mn-deco",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/React.createElement("p", {
     className: "mn-sub mn-taste-sub"
   }, "These are kept out of your recommendations. Tap any film to put it back into the mix."), watched.length === 0 ? /*#__PURE__*/React.createElement("div", {
     className: "mn-empty"
@@ -1240,9 +1587,9 @@ function MovieNight() {
     className: "mn-tile-title"
   }, f.title), (f.rating || f.year) && /*#__PURE__*/React.createElement("span", {
     className: "mn-tile-year"
-  }, f.rating ? "★ " + f.rating + "  ·  " : "", f.year || ""))))), /*#__PURE__*/React.createElement("button", {
+  }, f.type === "tv" ? "Series · " : "", f.rating ? "★ " + f.rating + "  ·  " : "", f.year || ""))))), /*#__PURE__*/React.createElement("button", {
     className: "mn-secondary mn-taste-done",
-    onClick: () => setScreen("home")
+    onClick: () => setScreen(returnTo)
   }, "Done")));
 }
 ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(MovieNight, null));</script>
